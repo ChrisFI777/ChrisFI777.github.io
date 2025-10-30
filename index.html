@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANKETA ATSISKAITYMO KORTELĖMIS PASLAUGOS</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            padding: 20px; 
+            background-color: #f0f2f5; 
+            color: #333;
+        }
+        .form-container { 
+            max-width: 900px; 
+            margin: 20px auto; 
+            background: white; 
+            padding: 30px 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            text-align: center; 
+            color: #007bff; 
+            margin-bottom: 30px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            border-bottom: 2px solid #e9ecef; 
+            padding-bottom: 10px; 
+            margin-top: 35px; 
+            color: #555;
+            font-size: 1.3em;
+        }
+        label { 
+            display: block; 
+            margin-top: 20px; 
+            font-weight: 600; 
+            line-height: 1.5;
+        }
+        input[type="text"], input[type="number"], input[type="email"], input[type="tel"] {
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 8px; 
+            border: 1px solid #ced4da; 
+            border-radius: 6px; 
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        .input-inline {
+            display: flex;
+            gap: 20px;
+        }
+        .input-inline > div {
+            flex: 1;
+        }
+        .radio-group, .checkbox-group { 
+            margin-top: 10px; 
+            padding: 10px 0;
+        }
+        .radio-group label, .checkbox-group label { 
+            font-weight: normal; 
+            display: inline-flex;
+            align-items: center;
+            margin-right: 30px; 
+            cursor: pointer;
+        }
+        .radio-group input[type="radio"], .checkbox-group input[type="checkbox"] {
+            margin-right: 8px;
+            width: auto; /* Pataisymas radio/checkbox dydžiui */
+        }
+        .note { 
+            margin-top: 30px; 
+            padding: 15px; 
+            background-color: #e2f0ff; 
+            border: 1px solid #b8daff; 
+            border-left: 5px solid #007bff;
+            border-radius: 6px; 
+            font-size: 0.9em;
+            color: #004085;
+        }
+        button { 
+            background-color: #28a745; /* Žalia mygtuko spalva */
+            color: white; 
+            padding: 15px 25px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            margin-top: 30px; 
+            font-size: 1.1em;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        button:hover { 
+            background-color: #218838; 
+        }
+        #response-message { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border-radius: 6px; 
+            display: none; 
+            font-weight: bold;
+        }
+        .success { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb;
+        }
+        .error { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h1>ANKETA ATSISKAITYMO KORTELĖMIS PASLAUGOS PASIŪLYMUI PATEIKTI</h1>
+    
+    <form id="payment-form">
+
+        <h2>1. INFORMACIJA APIE PREKYBINKĄ</h2>
+        
+        <label>JURIDINIO ASMENS PAVADINIMAS IR ĮMONĖS KODAS / VARDAS, PAVARDĖ IR ASMENS KODAS</label>
+        <div class="input-inline">
+            <div>
+                <input type="text" name="imones_pavadinimas" placeholder="Pavadinimas / Vardas, Pavardė" required>
+            </div>
+            <div>
+                <input type="text" name="imones_kodas" placeholder="Įmonės/Asmens kodas" required>
+            </div>
+        </div>
+
+        <label>TIKSLUS OBJEKTAS / RESTORANO PAVADINIMAS</label>
+        <input type="text" name="objekto_pavadinimas" required>
+
+        <label>ATSTOVO VARDAS, PAVARDĖ</label>
+        <input type="text" name="atstovo_vardas" required>
+
+        <label>TELEFONAS NR.</label>
+        <input type="tel" name="tel_nr" required>
+
+        <label>EL. PAŠTAS</label>
+        <input type="email" name="el_pastas" required>
+        
+        <label>VEIKLOS SRITIS</label>
+        <input type="text" name="veiklos_sritis" required>
+
+        <label>BANKO SĄSKAITOS NUMERIS</label>
+        <input type="text" name="banko_saskaitos_numeris" required>
+
+        <label>PLANUOJAMA ATSISKAITYMŲ KORTELĖMIS MĖNESIO APYVARTA EUR</label>
+        <input type="number" name="planuojama_apyvarta_eur" min="0" placeholder="pvz., 5000.00" required>
+        
+        <label>PLANUOJAMA VIDUTINĖ VIENO ATSISKAITYMO MOKĖJIMO KORTELĖMIS SUMA (EUR)</label>
+        <input type="number" name="planuojama_vidutine_suma" min="0" placeholder="pvz., 25.00" required>
+        
+        <label>AMERICAN EXPRESS KORTELIŲ PRIĖMIMAS</label>
+        <div class="radio-group">
+            <label><input type="radio" name="american_express" value="Taip" required> TAIP</label>
+            <label><input type="radio" name="american_express" value="Ne"> NE</label>
+        </div>
+
+        <h2>2. LĖŠŲ PERVEDIMAS PREKYBINKUI</h2>
+        <p>PAGEIDAUJAMOS PERVEDIMŲ DIENOS:</p>
+        
+        <div class="checkbox-group">
+            <label><input type="checkbox" name="pervedimo_diena_pirmadienis" value="Taip"> PIRMADIENIS</label>
+            <label><input type="checkbox" name="pervedimo_diena_antradienis" value="Taip"> ANTRADIENIS</label>
+            <label><input type="checkbox" name="pervedimo_diena_treciadienis" value="Taip"> TREČIADIENIS</label>
+            <label><input type="checkbox" name="pervedimo_diena_ketvirtadienis" value="Taip"> KETVIRTADIENIS</label>
+            <label><input type="checkbox" name="pervedimo_diena_penktadienis" value="Taip"> PENKTADIENIS</label>
+        </div>
+        
+        <div class="note">
+            <p>Pervedimai T+1 principu, t.y. sekantį darbo dieną (iki penktadienio-sekmadienio pinigai bus pervesti kartu) prisideda 0.3 proc. prie komis. proc. Jei komisinis mokestis yra 1 proc., tai bus skaičiuojama 1proc.</p>
+        </div>
+
+        <h2>3. UCS MINI POS KLAUSIMAI</h2>
+        
+        <label>ADRESAS, KURIUO REGISTRUOJAMA KASA</label>
+        <input type="text" name="adresas_kasos">
+
+        <label>AR REIKALINGAS TIEKIMAS MOKĖJIMO BŪDAS (PVZ. PAVEDIMU)?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="reikalingas_tiekimas_pavedimu" value="Taip"> TAIP</label>
+            <label><input type="radio" name="reikalingas_tiekimas_pavedimu" value="Ne"> NE</label>
+        </div>
+
+        <label>TAIP, NORMOS MOKĖJIMO BŪDO PAVADINIMAS</label>
+        <input type="text" name="norma_mok_pav">
+
+        <label>AR PREKIAUSITE ALKOHOLIU?</label>
+        <div class="radio-group">
+            <label><input type="radio" name="prekyba_alkoholiu" value="Taip" required> TAIP</label>
+            <label><input type="radio" name="prekyba_alkoholiu" value="Ne"> NE</label>
+        </div>
+
+        <div class="note">
+            <p>Aš, žemiau pasirašęs, tvirtinu, kad perskaičiau ir suprantu visą reikiamą informaciją bei sutinku su paslaugos teikimo sąlygomis.</p>
+        </div>
+
+        <button type="submit">Pateikti formą (Įrašyti duomenis)</button>
+    </form>
+    
+    <div id="response-message"></div>
+
+</div>
+
+<script>
+    // *************** JŪSŲ NAUJA NUORODA (PATIKRINTA) ***************
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwHh62FScZICwIV5H3pKPaHdY_U86NTtph74tVoW0xMhDx1KGBZXZclawVFY-z7nH8Y/exec'; 
+    // *************************************************************
+    
+    const form = document.getElementById('payment-form');
+    const responseMessage = document.getElementById('response-message');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Pasirodys pranešimas apie siuntimą
+        responseMessage.className = '';
+        responseMessage.classList.add('note');
+        responseMessage.textContent = 'Siunčiama... Palaukite sekundėlę.';
+        responseMessage.style.display = 'block';
+
+        const formData = new FormData(form);
+
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            body: formData 
+        })
+        .then(response => {
+             // Reikalinga, nes GAS grąžina JSON, bet gali turėti neteisingą Content-Type
+            return response.json().catch(err => {
+                // Jei nepavyksta gauti JSON, gaunamas tekstas - tai dažnai rodo leidimų klaidas
+                return response.text().then(text => {
+                    console.error("Klaida dešifruojant JSON:", text);
+                    // Patikriname, ar nebuvo "Permission denied" arba "Script not found"
+                    if (text.includes("Permission denied") || text.includes("Script not found")) {
+                        throw new Error("Patikrinkite Apps Script diegimo leidimus: Turi būti 'Anyone' (Bet kas).");
+                    }
+                    throw new Error("Gauta ne JSON tipo atsakymas. Patikrinkite Apps Script log'us.");
+                });
+            });
+        })
+        .then(data => {
+            if (data.result === 'success') {
+                responseMessage.className = 'success';
+                responseMessage.textContent = '✅ Sėkmingai pateikta! Duomenys įrašyti į Google Sheets.';
+                form.reset(); // Išvalome formą
+            } else {
+                throw new Error(data.error || "Nepavyko pateikti duomenų. Patikrinkite Apps Script log'us.");
+            }
+        })
+        .catch(error => {
+            console.error('Bendra klaida pateikiant formą:', error);
+            responseMessage.className = 'error';
+            responseMessage.textContent = `❌ KLAIDA: Nepavyko pateikti. ${error.message}`;
+        });
+    });
+</script>
+
+</body>
+</html>
